@@ -1,258 +1,144 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Akshitha Mallavarapu — Portfolio</title>
-  <meta name="description" content="Portfolio of Akshitha Mallavarapu — B.Tech CSE (Cybersecurity), Python developer, cybersecurity enthusiast." />
-  <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#7c5cff;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background: linear-gradient(180deg,#071025 0%, #071423 60%);
-      color:#e6eef6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:32px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Challenge</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0b0f19;
+        font-family: "Segoe UI", sans-serif;
+        color: #e9eefc;
+        overflow: hidden;
     }
 
-    .container{
-      max-width:1000px;
-      margin:0 auto;
-      display:grid;
-      gap:24px;
-      grid-template-columns: 320px 1fr;
+    /* Animated glowing background gradients */
+    .bg-glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        animation: drift 18s infinite alternate ease-in-out;
+        z-index: -10;
     }
 
-    /* Card */
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: var(--radius);
-      padding:20px;
-      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+    .blue { background: #3a7bd5; top: -10%; left: -10%; }
+    .teal { background: #2bd9d9; top: 40%; left: 70%; animation-duration: 22s; }
+    .green { background: #15ff99; top: 70%; left: 20%; animation-duration: 26s; }
+    .orange { background: #ff8f3c; top: 10%; left: 60%; animation-duration: 20s; }
+
+    @keyframes drift {
+        from { transform: translateY(0px) translateX(0px); }
+        to { transform: translateY(80px) translateX(40px); }
     }
 
-    /* Sidebar */
-    .sidebar .photo{
-      width:100%;
-      height:320px;
-      border-radius:12px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      margin-bottom:16px;
-    }
-    .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    h1{
-      margin:12px 0 4px;
-      font-size:22px;
-      letter-spacing:0.2px;
-    }
-    .muted{ color:var(--muted); font-size:14px; margin-bottom:12px; display:block; }
-    .contact a{ color:inherit; text-decoration:none; display:block; font-size:14px; margin:6px 0; }
-
-    .skills { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-    .skill { background:var(--glass); padding:6px 10px; border-radius:999px; font-size:13px; color:var(--muted); }
-
-    /* Main */
-    .main {
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    section h2{
-      font-size:16px;
-      margin:0 0 10px 0;
-    }
-    .summary { background: linear-gradient(90deg, rgba(124,92,255,0.08), rgba(124,92,255,0.02)); padding:14px; border-radius:10px; color:#eaf0ff; }
-    .projects { display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
-    .project {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:12px; border-radius:10px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
-    }
-    .project .meta { color:var(--muted); font-size:13px; margin-bottom:6px; }
-    .project p { margin:0; font-size:14px; color:#dfe9ff; }
-
-    .timeline { display:flex; flex-direction:column; gap:12px;}
-    .timeline-item { padding:12px; border-radius:10px; background:var(--card); }
-    .timeline-item .when { color:var(--muted); font-size:13px }
-    ul.plain { padding-left:0; list-style:none; margin:0; color:#d6e5ff; }
-    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-
-    /* Buttons */
-    .btn {
-      display:inline-flex; align-items:center; gap:8px;
-      background:linear-gradient(90deg,var(--accent), #5b8bff);
-      border:none; color:white; padding:10px 14px; border-radius:10px;
-      text-decoration:none; cursor:pointer; font-weight:600;
-      box-shadow: 0 6px 18px rgba(92,80,192,0.18);
+    /* Kubernetes hexagon icons floating */
+    .kube-hex {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background: rgba(0,140,255,0.15);
+        border: 2px solid rgba(0,150,255,0.35);
+        clip-path: polygon(25% 5%, 75% 5%, 95% 50%, 75% 95%, 25% 95%, 5% 50%);
+        animation: floatHex 12s infinite ease-in-out;
+        filter: blur(1px);
     }
 
-    /* Footer small */
-    footer { text-align:center; color:var(--muted); font-size:13px; margin-top:18px; grid-column:1/-1; }
-
-    /* Responsiveness */
-    @media (max-width:900px){
-      .container{ grid-template-columns: 1fr; padding:0 8px; }
-      .projects{ grid-template-columns: 1fr; }
-      .photo{ height:220px; }
+    @keyframes floatHex {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+        50% { transform: translateY(-40px) rotate(20deg); opacity: 0.8; }
+        100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
     }
-  </style>
+
+    .hex1 { top: 20%; left: 10%; }
+    .hex2 { top: 60%; left: 80%; animation-delay: -2s; }
+    .hex3 { top: 75%; left: 35%; animation-delay: -4s; }
+
+    /* Title */
+    #title {
+        text-align: center;
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin-top: 60px;
+        letter-spacing: 4px;
+        background: linear-gradient(to right, #00d2ff, #3a7bd5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+    }
+
+    /* Container for statements */
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 80px;
+    }
+
+    .card {
+        width: 40%;
+        background: rgba(255,255,255,0.04);
+        padding: 35px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 0 40px rgba(0,150,255,0.25);
+        transition: 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 50px rgba(0,200,255,0.5);
+    }
+
+    .label {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #00c3ff;
+        margin-bottom: 12px;
+    }
+
+    .text {
+        font-size: 1.4rem;
+        opacity: 0.9;
+    }
+</style>
+
 </head>
 <body>
-  <div class="  container"  >
-    <!-- SIDEBAR -->
-    <aside class="sidebar card">
-      <div class="photo" aria-hidden="true">
-        <!-- Replace with your photo -->
-        <img src="https://via.placeholder.com/600x600.png?text= Akshitha+Mallavarapu " alt=" Akshitha Mallavarapu ">
-      </div>
 
-      <h1>Akshitha Mallavarapu</h1>
-      <span class="muted">B.Tech CSE (Cybersecurity) · Python · Web · Cybersecurity</span>
+<!-- Glowing animated background blobs -->
+<div class="bg-glow blue"></div>
+<div class="bg-glow teal"></div>
+<div class="bg-glow green"></div>
+<div class="bg-glow orange"></div>
 
-      <div class="contact" aria-label="Contact">
-        <a href="tel:+919346057549">📞 +91 93460 57549</a>
-        <a href="mailto:akshithamallavarapu.1@gmail.com">✉️ akshithamallavarapu.1@gmail.com</a>
-        <a href="https://www.linkedin.com/in/akshitha-mallavarapu-b2910a24a" target="_blank" rel="noopener">🔗 LinkedIn</a>
-      </div>
+<!-- Floating Kubernetes hexagons -->
+<div class="kube-hex hex1"></div>
+<div class="kube-hex hex2"></div>
+<div class="kube-hex hex3"></div>
 
-      <hr style="border:0;border-top:1px solid rgba(255,255,255,0.03); margin:16px 0;">
+<!-- Title -->
+<div id="title">DevOps Challenge</div>
 
-      <strong style="display:block; margin-bottom:8px;">Skills</strong>
-      <div class="skills" aria-label="Skills list">
-        <span class="skill">Python</span>
-        <span class="skill">HTML</span>
-        <span class="skill">CSS</span>
-        <span class="skill">MySQL</span>
-        <span class="skill">Wireshark</span>
-        <span class="skill">Nmap</span>
-        <span class="skill">SIEM</span>
-      </div>
+<!-- Two statement cards -->
+<div class="wrapper">
+    <div class="card">
+        <div class="label">Statement A</div>
+        <div class="text" id="statementA">A. CI/CD helps catch issues early by running tests automatically. 
+</div>
+    </div>
 
-      <hr style="border:0;border-top:1px solid rgba(255,255,255,0.03); margin:16px 0;">
+    <div class="card">
+        <div class="label">Statement B</div>
+        <div class="text" id="statementB">B. CI/CD is only useful after deployment.
+</div>
+    </div>
+</div>
 
-      <strong style="display:block; margin-bottom:8px;">Education</strong>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="when">B.Tech — Sri Venkateswara Engineering College, 2025</div>
-          <div class="meta">CSE (Cybersecurity) — Percentage: 81.3%</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="when">Intermediate — 2021</div>
-          <div class="meta">MPC — Percentage: 94.4%</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="when">Secondary Education — 2019</div>
-          <div class="meta">Mathematics — CGPA 10.0</div>
-        </div>
-      </div>
-
-      <div style="margin-top:16px;">
-        <!-- Update this href to your actual resume file URL -->
-        <a class="btn" href="AkshithaM_Resume.pdf" download>⬇️ Download Resume</a>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <section class="card summary" aria-labelledby="about-heading">
-        <h2 id="about-heading">Career Objective</h2>
-        <p>
-          Looking forward to work in an organization that provides me with challenges and opportunities
-          to enhance my knowledge and skills. Ultimately, I aim to make a positive impact through my dedication.
-        </p>
-      </section>
-
-      <section class="card" aria-labelledby="projects-heading">
-        <h2 id="projects-heading">Projects</h2>
-        <div class="projects" role="list">
-          <article class="project" role="listitem">
-            <div class="meta">Cyber Threat Detection — Python / ANN</div>
-            <p>
-              Used Artificial Neural Networks to analyze event profiles and detect unusual patterns that
-              may indicate potential cyber threats. Improved anomaly detection accuracy and strengthened overall security.
-            </p>
-          </article>
-
-          <article class="project" role="listitem">
-            <div class="meta">E-Commerce Storefront — HTML, CSS</div>
-            <p>
-              Designed and developed a responsive storefront showcasing products with a clean layout,
-              pricing, and cross-device compatibility.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="card" aria-labelledby="experience-heading">
-        <h2 id="experience-heading">Experience (Internship)</h2>
-        <div class="timeline-item">
-          <div class="when">Python Intern — Ad Infocom systems</div>
-          <div class="meta">Covered Python fundamentals, OOP, SQLite, and applied Python in final project modules.</div>
-        </div>
-      </section>
-
-      <section class="card" aria-labelledby="certs-heading">
-        <h2 id="certs-heading">Certifications</h2>
-        <ul class="plain">
-          <li>Programming with Python — Internshala</li>
-          <li>CCNAv7: Introduction to Networks — Cisco</li>
-          <li>Automate Cybersecurity Tasks with Python — Coursera</li>
-          <li>Cloud Computing — NPTEL</li>
-          <li>Attended workshop: Endpoint Detection and Response — APSSDC</li>
-        </ul>
-      </section>
-
-      <section class="card" aria-labelledby="achievements-heading">
-        <h2 id="achievements-heading">Achievements</h2>
-        <ul class="plain">
-          <li>Organized a National Level Techno-Cultural Fest (SPARK)</li>
-          <li>Led a community service project as Team Leader</li>
-        </ul>
-      </section>
-
-      <section class="card" aria-labelledby="declaration-heading">
-        <h2 id="declaration-heading">Declaration</h2>
-        <p style="color:var(--muted)">
-          I hereby declare that the information provided in this resume is true and accurate.
-        </p>
-        <div style="margin-top:8px; color:var(--muted); font-size:13px;">
-          Mail: <a href="mailto:akshithamallavarapu.1@gmail.com" style="color:inherit">akshithamallavarapu.1@gmail.com</a>
-          · LinkedIn: <a href="https://www.linkedin.com/in/akshitha-mallavarapu-b2910a24a" target="_blank" rel="noopener" style="color:inherit">Profile</a>
-        </div>
-      </section>
-
-      <footer>
-        Built with ❤️ · Info based on uploaded resume. :contentReference[oaicite:1]{index=1}
-      </footer>
-    </main>
-  </div>
-
-  <!-- Small JS for smooth scroll (optional) -->
-  <script>
-    // Smooth-scrolling for internal links if you add nav later
-    (function(){
-      if('scrollBehavior' in document.documentElement.style) return;
-      // polyfill would go here; optional
-    })();
-  </script>
 </body>
 </html>
